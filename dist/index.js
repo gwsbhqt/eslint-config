@@ -13,6 +13,7 @@ import { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { findUpSync } from "find-up";
 import { includeIgnoreFile } from "@eslint/compat";
+import esX from "eslint-plugin-es-x";
 
 //#region src/createESLintConfig/constants.ts
 const __filename = fileURLToPath(import.meta.url);
@@ -136,6 +137,13 @@ function createEnableRulesConfig(config$1) {
 }
 
 //#endregion
+//#region src/createESLintConfig/configs/createESXConfig.ts
+function createESXConfig(config$1) {
+	const target = config$1.esTarget === "es6" ? "es2015" : config$1.esTarget;
+	return target === "esnext" ? [] : esX.configs[`flat/restrict-to-${target}`];
+}
+
+//#endregion
 //#region src/createESLintConfig/index.ts
 /**
 * Creates a standardized ESLint configuration with sensible defaults and customization options.
@@ -177,12 +185,13 @@ function createESLintConfig(config$1) {
 		disableFiles: config$1?.disableFiles ?? [],
 		disableRules: config$1?.disableRules ?? [],
 		enableRules: config$1?.enableRules ?? [],
+		esTarget: config$1?.esTarget ?? "esnext",
 		noUnresolvedIgnore: config$1?.noUnresolvedIgnore ?? [],
 		rules: config$1?.rules ?? {},
 		sortImportsGroups: config$1?.sortImportsGroups ?? [],
 		sortImportsInternalPattern: config$1?.sortImportsInternalPattern ?? []
 	};
-	return config(flatConfigs.recommended, flatConfigs.typescript, jslint.configs.recommended, perfectionist.configs["recommended-natural"], react.configs.flat.recommended ?? [], react.configs.flat["jsx-runtime"] ?? [], reactHooks.configs["recommended-latest"], reactRefresh.configs.recommended, configs.recommended, createDisableFilesConfig(realConfig), createDisableRulesConfig(realConfig), createEnableRulesConfig(realConfig), createCustomPerfectionistConfig(realConfig), ...realConfig.configs, prettierRecommended, prettierConfig);
+	return config(flatConfigs.recommended, flatConfigs.typescript, jslint.configs.recommended, perfectionist.configs["recommended-natural"], react.configs.flat.recommended ?? [], react.configs.flat["jsx-runtime"] ?? [], reactHooks.configs["recommended-latest"], reactRefresh.configs.recommended, configs.recommended, createESXConfig(realConfig), createDisableFilesConfig(realConfig), createDisableRulesConfig(realConfig), createEnableRulesConfig(realConfig), createCustomPerfectionistConfig(realConfig), ...realConfig.configs, prettierRecommended, prettierConfig);
 }
 
 //#endregion

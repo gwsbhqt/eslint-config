@@ -12,14 +12,16 @@ import {
   createCustomPerfectionistConfig,
   createDisableFilesConfig,
   createDisableRulesConfig,
-  createEnableRulesConfig
+  createEnableRulesConfig,
+  createESXConfig
 } from './configs'
 
 import type {
   CreateCustomPerfectionistConfig,
   CreateDisableFilesConfig,
   CreateDisableRulesConfig,
-  CreateEnableRulesConfig
+  CreateEnableRulesConfig,
+  CreateESXConfig
 } from './configs'
 import type {
   ConfigArray,
@@ -30,7 +32,8 @@ interface CreateESLintConfig
   extends CreateCustomPerfectionistConfig,
     CreateDisableFilesConfig,
     CreateDisableRulesConfig,
-    CreateEnableRulesConfig {
+    CreateEnableRulesConfig,
+    CreateESXConfig {
   configs: InfiniteDepthConfigWithExtends[]
 }
 
@@ -76,6 +79,7 @@ export function createESLintConfig(
     disableFiles: config?.disableFiles ?? [],
     disableRules: config?.disableRules ?? [],
     enableRules: config?.enableRules ?? [],
+    esTarget: config?.esTarget ?? 'esnext',
     noUnresolvedIgnore: config?.noUnresolvedIgnore ?? [],
     rules: config?.rules ?? {},
     sortImportsGroups: config?.sortImportsGroups ?? [],
@@ -91,6 +95,7 @@ export function createESLintConfig(
     reactHooks.configs['recommended-latest'],
     reactRefresh.configs.recommended,
     tslint.recommended,
+    createESXConfig(realConfig),
     createDisableFilesConfig(realConfig),
     createDisableRulesConfig(realConfig),
     createEnableRulesConfig(realConfig),

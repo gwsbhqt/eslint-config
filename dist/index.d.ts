@@ -1,5 +1,6 @@
 import { ConfigArray, InfiniteDepthConfigWithExtends } from "typescript-eslint";
 import "@eslint/compat";
+import { ESTarget } from "eslint-plugin-es-x";
 import { Linter } from "eslint";
 import { Config } from "prettier";
 
@@ -34,8 +35,13 @@ interface CreateEnableRulesConfig {
   enableRules: string[];
 }
 //#endregion
+//#region src/createESLintConfig/configs/createESXConfig.d.ts
+interface CreateESXConfig {
+  esTarget: ESTarget;
+}
+//#endregion
 //#region src/createESLintConfig/index.d.ts
-interface CreateESLintConfig extends CreateCustomPerfectionistConfig, CreateDisableFilesConfig, CreateDisableRulesConfig, CreateEnableRulesConfig {
+interface CreateESLintConfig extends CreateCustomPerfectionistConfig, CreateDisableFilesConfig, CreateDisableRulesConfig, CreateEnableRulesConfig, CreateESXConfig {
   configs: InfiniteDepthConfigWithExtends[];
 }
 /**

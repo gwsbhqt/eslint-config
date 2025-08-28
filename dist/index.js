@@ -110,15 +110,17 @@ function createDisableFilesConfig(config$1) {
 //#endregion
 //#region src/createESLintConfig/configs/createDisableRulesConfig.ts
 function createDisableRulesConfig(config$1) {
-	const defaultRules = [
+	const defaultDisableRules = [
 		"@typescript-eslint/ban-ts-comment",
+		"@typescript-eslint/no-empty-object-type",
 		"@typescript-eslint/no-explicit-any",
 		"@typescript-eslint/no-namespace",
 		"@typescript-eslint/no-unsafe-function-type",
+		"import-x/no-named-as-default-member",
 		"react-refresh/only-export-components",
 		"react/prop-types"
 	];
-	const disableRules = defaultRules.concat(config$1.disableRules);
+	const disableRules = defaultDisableRules.concat(config$1.disableRules);
 	return { rules: Object.fromEntries(disableRules.map((rule) => [rule, 0])) };
 }
 

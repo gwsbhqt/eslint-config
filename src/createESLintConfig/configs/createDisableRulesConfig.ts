@@ -7,15 +7,17 @@ export interface CreateDisableRulesConfig {
 export function createDisableRulesConfig(
   config: CreateDisableRulesConfig
 ): FlatConfig {
-  const defaultRules = [
+  const defaultDisableRules = [
     '@typescript-eslint/ban-ts-comment',
+    '@typescript-eslint/no-empty-object-type',
     '@typescript-eslint/no-explicit-any',
     '@typescript-eslint/no-namespace',
     '@typescript-eslint/no-unsafe-function-type',
+    'import-x/no-named-as-default-member',
     'react-refresh/only-export-components',
     'react/prop-types'
   ]
-  const disableRules = defaultRules.concat(config.disableRules)
+  const disableRules = defaultDisableRules.concat(config.disableRules)
   return {
     rules: Object.fromEntries(disableRules.map((rule) => [rule, 0]))
   }

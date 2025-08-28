@@ -1,12 +1,19 @@
 {
   "name": "@gwsbhqt/eslint-config",
   "version": "0.0.1",
+  "description": "A flexible and powerful factory for creating ESLint and Prettier configurations.",
   "license": "MIT",
   "type": "module",
   "main": "dist/index.js",
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsdown",
-    "lint": "eslint . --fix"
+    "lint": "eslint . --fix",
+    "release:patch": "tsdown && npm version patch && npm publish"
   },
   "dependencies": {
     "@eslint/compat": "^1.3.2",
@@ -31,5 +38,8 @@
     "tsdown": "^0.14.2",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.41.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

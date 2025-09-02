@@ -10,6 +10,7 @@ export function createEnableRulesConfig(
   const defaultEnableRules = [
     '@typescript-eslint/consistent-type-imports',
     'import-x/consistent-type-specifier-style',
+    'lines-between-class-members',
     'no-useless-rename',
     'object-shorthand',
     'react/self-closing-comp'

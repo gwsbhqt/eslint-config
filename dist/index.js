@@ -1,4 +1,5 @@
 import jslint from "@eslint/js";
+import stylistic from "@stylistic/eslint-plugin";
 import prettierConfig from "eslint-config-prettier";
 import { flatConfigs } from "eslint-plugin-import-x";
 import perfectionist from "eslint-plugin-perfectionist";
@@ -130,6 +131,7 @@ function createEnableRulesConfig(config$1) {
 	const defaultEnableRules = [
 		"@typescript-eslint/consistent-type-imports",
 		"import-x/consistent-type-specifier-style",
+		"lines-between-class-members",
 		"no-useless-rename",
 		"object-shorthand",
 		"react/self-closing-comp"
@@ -193,7 +195,7 @@ function createESLintConfig(config$1) {
 		sortImportsGroups: config$1?.sortImportsGroups ?? [],
 		sortImportsInternalPattern: config$1?.sortImportsInternalPattern ?? []
 	};
-	return config(flatConfigs.recommended, flatConfigs.typescript, jslint.configs.recommended, perfectionist.configs["recommended-natural"], react.configs.flat.recommended ?? [], react.configs.flat["jsx-runtime"] ?? [], reactHooks.configs["recommended-latest"], reactRefresh.configs.recommended, configs.recommended, createESXConfig(realConfig), createDisableFilesConfig(realConfig), createDisableRulesConfig(realConfig), createEnableRulesConfig(realConfig), createCustomPerfectionistConfig(realConfig), ...realConfig.configs, prettierRecommended, prettierConfig);
+	return config(flatConfigs.recommended, flatConfigs.typescript, jslint.configs.recommended, perfectionist.configs["recommended-natural"], react.configs.flat.recommended ?? [], react.configs.flat["jsx-runtime"] ?? [], reactHooks.configs["recommended-latest"], reactRefresh.configs.recommended, stylistic.configs.recommended, configs.recommended, createESXConfig(realConfig), createDisableFilesConfig(realConfig), createDisableRulesConfig(realConfig), createEnableRulesConfig(realConfig), createCustomPerfectionistConfig(realConfig), ...realConfig.configs, prettierRecommended, prettierConfig);
 }
 
 //#endregion

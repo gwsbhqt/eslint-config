@@ -1,4 +1,5 @@
 import jslint from '@eslint/js'
+import stylistic from '@stylistic/eslint-plugin'
 import prettierConfig from 'eslint-config-prettier'
 import { flatConfigs as importX } from 'eslint-plugin-import-x'
 import perfectionist from 'eslint-plugin-perfectionist'
@@ -94,6 +95,7 @@ export function createESLintConfig(
     react.configs.flat['jsx-runtime'] ?? [],
     reactHooks.configs['recommended-latest'],
     reactRefresh.configs.recommended,
+    stylistic.configs.recommended,
     tslint.recommended,
     createESXConfig(realConfig),
     createDisableFilesConfig(realConfig),

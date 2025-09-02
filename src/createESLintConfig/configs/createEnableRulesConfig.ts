@@ -8,9 +8,9 @@ export function createEnableRulesConfig(
   config: CreateEnableRulesConfig
 ): FlatConfig {
   const defaultEnableRules = [
+    '@stylistic/lines-between-class-members',
     '@typescript-eslint/consistent-type-imports',
     'import-x/consistent-type-specifier-style',
-    'lines-between-class-members',
     'no-useless-rename',
     'object-shorthand',
     'react/self-closing-comp'

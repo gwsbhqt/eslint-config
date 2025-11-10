@@ -132,6 +132,11 @@ function createEnableRulesConfig(config$1) {
 		"@stylistic/lines-between-class-members",
 		"@typescript-eslint/consistent-type-imports",
 		"import-x/consistent-type-specifier-style",
+		"import-x/first",
+		"import-x/newline-after-import",
+		"import-x/no-absolute-path",
+		"import-x/no-empty-named-blocks",
+		"import-x/no-useless-path-segments",
 		"no-useless-rename",
 		"object-shorthand",
 		"react/self-closing-comp"

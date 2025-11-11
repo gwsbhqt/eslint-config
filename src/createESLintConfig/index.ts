@@ -5,7 +5,7 @@ import { flatConfigs as importX } from 'eslint-plugin-import-x'
 import perfectionist from 'eslint-plugin-perfectionist'
 import prettierRecommended from 'eslint-plugin-prettier/recommended'
 import react from 'eslint-plugin-react'
-import * as reactHooks from 'eslint-plugin-react-hooks'
+import { configs as reactHooks } from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import { config as defineConfig, configs as tslint } from 'typescript-eslint'
 
@@ -93,7 +93,7 @@ export function createESLintConfig(
     perfectionist.configs['recommended-natural'],
     react.configs.flat.recommended ?? [],
     react.configs.flat['jsx-runtime'] ?? [],
-    reactHooks.configs['recommended-latest'],
+    reactHooks.flat['recommended-latest'],
     reactRefresh.configs.recommended,
     stylistic.configs.recommended,
     tslint.recommended,

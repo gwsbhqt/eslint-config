@@ -5,9 +5,9 @@ import { flatConfigs } from "eslint-plugin-import-x";
 import perfectionist from "eslint-plugin-perfectionist";
 import prettierRecommended from "eslint-plugin-prettier/recommended";
 import react from "eslint-plugin-react";
-import * as reactHooks from "eslint-plugin-react-hooks";
+import { configs } from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
-import { config, configs } from "typescript-eslint";
+import { config, configs as configs$1 } from "typescript-eslint";
 import { createTypeScriptImportResolver } from "eslint-import-resolver-typescript";
 import globals from "globals";
 import { dirname } from "node:path";
@@ -25,43 +25,37 @@ const tsconfigPath = findUpSync("tsconfig.json", { cwd: __dirname });
 //#endregion
 //#region src/createESLintConfig/rules/createImportXNoUnresolved.ts
 function createImportXNoUnresolved(config$1) {
-	const defaultIgnore = [
+	return [2, { ignore: [
 		"^(~|@|#)\\w+/",
 		"^(bun|node|deno):",
 		"\\.(svg|json)$"
-	];
-	const ignore = defaultIgnore.concat(config$1.noUnresolvedIgnore);
-	return [2, { ignore }];
+	].concat(config$1.noUnresolvedIgnore) }];
 }
 
 //#endregion
 //#region src/createESLintConfig/rules/createPerfectionistSortImports.ts
 function createPerfectionistSortImports(config$1) {
-	const defaultGroups = [
-		["side-effect", "side-effect-style"],
-		"style",
-		"builtin",
-		"external",
-		["internal", "subpath"],
-		[
-			"parent",
-			"sibling",
-			"index"
-		],
-		"unknown",
-		"import",
-		"type"
-	];
-	const defaultInternalPattern = [
-		"^~/.+",
-		"^@/.+",
-		"^#/.+"
-	];
-	const groups = config$1.sortImportsGroups.length ? config$1.sortImportsGroups : defaultGroups;
-	const internalPattern = defaultInternalPattern.concat(config$1.sortImportsInternalPattern);
 	return [2, {
-		groups,
-		internalPattern
+		groups: config$1.sortImportsGroups.length ? config$1.sortImportsGroups : [
+			["side-effect", "side-effect-style"],
+			"style",
+			"builtin",
+			"external",
+			["internal", "subpath"],
+			[
+				"parent",
+				"sibling",
+				"index"
+			],
+			"unknown",
+			"import",
+			"type"
+		],
+		internalPattern: [
+			"^~/.+",
+			"^@/.+",
+			"^#/.+"
+		].concat(config$1.sortImportsInternalPattern)
 	}];
 }
 
@@ -101,8 +95,7 @@ function createCustomPerfectionistConfig(config$1) {
 //#endregion
 //#region src/createESLintConfig/configs/createDisableFilesConfig.ts
 function createDisableFilesConfig(config$1) {
-	const defaultFiles = ["**/typings", "**/dist"];
-	const disableFiles = defaultFiles.concat(config$1.disableFiles);
+	const disableFiles = ["**/typings", "**/dist"].concat(config$1.disableFiles);
 	const flatConfig = gitignorePath ? includeIgnoreFile(gitignorePath) : {};
 	flatConfig.ignores?.push(...disableFiles);
 	return flatConfig;
@@ -111,7 +104,7 @@ function createDisableFilesConfig(config$1) {
 //#endregion
 //#region src/createESLintConfig/configs/createDisableRulesConfig.ts
 function createDisableRulesConfig(config$1) {
-	const defaultDisableRules = [
+	const disableRules = [
 		"@typescript-eslint/ban-ts-comment",
 		"@typescript-eslint/no-empty-object-type",
 		"@typescript-eslint/no-explicit-any",
@@ -120,15 +113,14 @@ function createDisableRulesConfig(config$1) {
 		"import-x/no-named-as-default-member",
 		"react-refresh/only-export-components",
 		"react/prop-types"
-	];
-	const disableRules = defaultDisableRules.concat(config$1.disableRules);
+	].concat(config$1.disableRules);
 	return { rules: Object.fromEntries(disableRules.map((rule) => [rule, 0])) };
 }
 
 //#endregion
 //#region src/createESLintConfig/configs/createEnableRulesConfig.ts
 function createEnableRulesConfig(config$1) {
-	const defaultEnableRules = [
+	const enableRules = [
 		"@stylistic/lines-between-class-members",
 		"@typescript-eslint/consistent-type-imports",
 		"import-x/consistent-type-specifier-style",
@@ -140,8 +132,7 @@ function createEnableRulesConfig(config$1) {
 		"no-useless-rename",
 		"object-shorthand",
 		"react/self-closing-comp"
-	];
-	const enableRules = defaultEnableRules.concat(config$1.enableRules);
+	].concat(config$1.enableRules);
 	return { rules: Object.fromEntries(enableRules.map((rule) => [rule, 2])) };
 }
 
@@ -200,7 +191,7 @@ function createESLintConfig(config$1) {
 		sortImportsGroups: config$1?.sortImportsGroups ?? [],
 		sortImportsInternalPattern: config$1?.sortImportsInternalPattern ?? []
 	};
-	return config(flatConfigs.recommended, flatConfigs.typescript, jslint.configs.recommended, perfectionist.configs["recommended-natural"], react.configs.flat.recommended ?? [], react.configs.flat["jsx-runtime"] ?? [], reactHooks.configs["recommended-latest"], reactRefresh.configs.recommended, stylistic.configs.recommended, configs.recommended, createESXConfig(realConfig), createDisableFilesConfig(realConfig), createDisableRulesConfig(realConfig), createEnableRulesConfig(realConfig), createCustomPerfectionistConfig(realConfig), ...realConfig.configs, prettierRecommended, prettierConfig);
+	return config(flatConfigs.recommended, flatConfigs.typescript, jslint.configs.recommended, perfectionist.configs["recommended-natural"], react.configs.flat.recommended ?? [], react.configs.flat["jsx-runtime"] ?? [], configs.flat["recommended-latest"], reactRefresh.configs.recommended, stylistic.configs.recommended, configs$1.recommended, createESXConfig(realConfig), createDisableFilesConfig(realConfig), createDisableRulesConfig(realConfig), createEnableRulesConfig(realConfig), createCustomPerfectionistConfig(realConfig), ...realConfig.configs, prettierRecommended, prettierConfig);
 }
 
 //#endregion

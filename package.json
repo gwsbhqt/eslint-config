@@ -4,7 +4,7 @@
   "description": "A flexible and powerful factory for creating ESLint and Prettier configurations.",
   "license": "MIT",
   "type": "module",
-  "main": "dist/index.js",
+  "main": "dist/index.mjs",
   "files": [
     "dist/",
     "README.md",
@@ -38,9 +38,9 @@
     "prettier": "^3.6.2",
     "prettier-plugin-packagejson": "^2.5.19",
     "prettier-plugin-tailwindcss": "^0.7.1",
-    "tsdown": "^0.16.1",
+    "tsdown": "^0.16.2",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.46.3"
+    "typescript-eslint": "^8.46.4"
   },
   "publishConfig": {
     "access": "public"

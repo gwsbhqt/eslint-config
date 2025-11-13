@@ -7,18 +7,16 @@ import prettierRecommended from "eslint-plugin-prettier/recommended";
 import react from "eslint-plugin-react";
 import { configs } from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
+import unicorn from "eslint-plugin-unicorn";
 import { config, configs as configs$1 } from "typescript-eslint";
 import { createTypeScriptImportResolver } from "eslint-import-resolver-typescript";
 import globals from "globals";
-import { dirname } from "node:path";
-import { fileURLToPath } from "node:url";
 import { findUpSync } from "find-up";
 import { includeIgnoreFile } from "@eslint/compat";
 import esX from "eslint-plugin-es-x";
 
 //#region src/createESLintConfig/constants.ts
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __dirname = import.meta.dirname;
 const gitignorePath = findUpSync(".gitignore", { cwd: __dirname });
 const tsconfigPath = findUpSync("tsconfig.json", { cwd: __dirname });
 
@@ -26,9 +24,9 @@ const tsconfigPath = findUpSync("tsconfig.json", { cwd: __dirname });
 //#region src/createESLintConfig/rules/createImportXNoUnresolved.ts
 function createImportXNoUnresolved(config$1) {
 	return [2, { ignore: [
-		"^(~|@|#)\\w+/",
-		"^(bun|node|deno):",
-		"\\.(svg|json)$"
+		String.raw`^(~|@|#)\w+/`,
+		String.raw`^(bun|node|deno):`,
+		String.raw`\.(svg|json)$`
 	].concat(config$1.noUnresolvedIgnore) }];
 }
 
@@ -36,7 +34,7 @@ function createImportXNoUnresolved(config$1) {
 //#region src/createESLintConfig/rules/createPerfectionistSortImports.ts
 function createPerfectionistSortImports(config$1) {
 	return [2, {
-		groups: config$1.sortImportsGroups.length ? config$1.sortImportsGroups : [
+		groups: config$1.sortImportsGroups.length > 0 ? config$1.sortImportsGroups : [
 			["side-effect", "side-effect-style"],
 			"style",
 			"builtin",
@@ -112,7 +110,9 @@ function createDisableRulesConfig(config$1) {
 		"@typescript-eslint/no-unsafe-function-type",
 		"import-x/no-named-as-default-member",
 		"react-refresh/only-export-components",
-		"react/prop-types"
+		"react/prop-types",
+		"unicorn/filename-case",
+		"unicorn/prefer-spread"
 	].concat(config$1.disableRules);
 	return { rules: Object.fromEntries(disableRules.map((rule) => [rule, 0])) };
 }
@@ -131,7 +131,11 @@ function createEnableRulesConfig(config$1) {
 		"import-x/no-useless-path-segments",
 		"no-useless-rename",
 		"object-shorthand",
-		"react/self-closing-comp"
+		"react/self-closing-comp",
+		"unicorn/better-regex",
+		"unicorn/consistent-destructuring",
+		"unicorn/custom-error-definition",
+		"unicorn/prefer-import-meta-properties"
 	].concat(config$1.enableRules);
 	return { rules: Object.fromEntries(enableRules.map((rule) => [rule, 2])) };
 }
@@ -191,7 +195,7 @@ function createESLintConfig(config$1) {
 		sortImportsGroups: config$1?.sortImportsGroups ?? [],
 		sortImportsInternalPattern: config$1?.sortImportsInternalPattern ?? []
 	};
-	return config(flatConfigs.recommended, flatConfigs.typescript, jslint.configs.recommended, perfectionist.configs["recommended-natural"], react.configs.flat.recommended ?? [], react.configs.flat["jsx-runtime"] ?? [], configs.flat["recommended-latest"], reactRefresh.configs.recommended, stylistic.configs.recommended, configs$1.recommended, createESXConfig(realConfig), createDisableFilesConfig(realConfig), createDisableRulesConfig(realConfig), createEnableRulesConfig(realConfig), createCustomPerfectionistConfig(realConfig), ...realConfig.configs, prettierRecommended, prettierConfig);
+	return config(flatConfigs.recommended, flatConfigs.typescript, jslint.configs.recommended, perfectionist.configs["recommended-natural"], react.configs.flat.recommended ?? [], react.configs.flat["jsx-runtime"] ?? [], configs.flat["recommended-latest"], reactRefresh.configs.recommended, stylistic.configs.recommended, configs$1.recommended, unicorn.configs.recommended, createESXConfig(realConfig), createDisableFilesConfig(realConfig), createDisableRulesConfig(realConfig), createEnableRulesConfig(realConfig), createCustomPerfectionistConfig(realConfig), ...realConfig.configs, prettierRecommended, prettierConfig);
 }
 
 //#endregion
@@ -221,11 +225,9 @@ function createESLintConfig(config$1) {
 function createPrettierConfig(options) {
 	const overrides = [];
 	const plugins = options?.plugins ?? [];
-	if (options?.overrides) Object.entries(options.overrides).forEach(([key, value]) => {
-		overrides.push({
-			files: key,
-			options: value
-		});
+	if (options?.overrides) for (const [key, value] of Object.entries(options.overrides)) overrides.push({
+		files: key,
+		options: value
 	});
 	return {
 		semi: false,

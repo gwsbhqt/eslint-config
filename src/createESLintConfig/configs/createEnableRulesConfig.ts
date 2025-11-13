@@ -18,7 +18,11 @@ export function createEnableRulesConfig(
     'import-x/no-useless-path-segments',
     'no-useless-rename',
     'object-shorthand',
-    'react/self-closing-comp'
+    'react/self-closing-comp',
+    'unicorn/better-regex',
+    'unicorn/consistent-destructuring',
+    'unicorn/custom-error-definition',
+    'unicorn/prefer-import-meta-properties'
   ]
   const enableRules = defaultEnableRules.concat(config.enableRules)
   return {

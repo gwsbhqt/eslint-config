@@ -7,6 +7,7 @@ import prettierRecommended from 'eslint-plugin-prettier/recommended'
 import react from 'eslint-plugin-react'
 import { configs as reactHooks } from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
+import unicorn from 'eslint-plugin-unicorn'
 import { config as defineConfig, configs as tslint } from 'typescript-eslint'
 
 import {
@@ -97,6 +98,7 @@ export function createESLintConfig(
     reactRefresh.configs.recommended,
     stylistic.configs.recommended,
     tslint.recommended,
+    unicorn.configs.recommended,
     createESXConfig(realConfig),
     createDisableFilesConfig(realConfig),
     createDisableRulesConfig(realConfig),

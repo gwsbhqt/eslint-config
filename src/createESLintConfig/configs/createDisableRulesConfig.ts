@@ -15,7 +15,9 @@ export function createDisableRulesConfig(
     '@typescript-eslint/no-unsafe-function-type',
     'import-x/no-named-as-default-member',
     'react-refresh/only-export-components',
-    'react/prop-types'
+    'react/prop-types',
+    'unicorn/filename-case',
+    'unicorn/prefer-spread'
   ]
   const disableRules = defaultDisableRules.concat(config.disableRules)
   return {

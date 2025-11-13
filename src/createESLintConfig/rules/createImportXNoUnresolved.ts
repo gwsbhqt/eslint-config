@@ -7,7 +7,11 @@ export interface CreateImportXNoUnresolved {
 export function createImportXNoUnresolved(
   config: CreateImportXNoUnresolved
 ): Linter.RuleEntry {
-  const defaultIgnore = ['^(~|@|#)\\w+/', '^(bun|node|deno):', '\\.(svg|json)$']
+  const defaultIgnore = [
+    String.raw`^(~|@|#)\w+/`,
+    String.raw`^(bun|node|deno):`,
+    String.raw`\.(svg|json)$`
+  ]
   const ignore = defaultIgnore.concat(config.noUnresolvedIgnore)
   return [2, { ignore }]
 }

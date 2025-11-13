@@ -20,9 +20,10 @@ export function createPerfectionistSortImports(
     'type'
   ]
   const defaultInternalPattern = ['^~/.+', '^@/.+', '^#/.+']
-  const groups = config.sortImportsGroups.length
-    ? config.sortImportsGroups
-    : defaultGroups
+  const groups =
+    config.sortImportsGroups.length > 0
+      ? config.sortImportsGroups
+      : defaultGroups
   const internalPattern = defaultInternalPattern.concat(
     config.sortImportsInternalPattern
   )

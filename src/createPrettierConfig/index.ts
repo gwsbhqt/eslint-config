@@ -35,12 +35,12 @@ export function createPrettierConfig(
   const plugins = options?.plugins ?? []
 
   if (options?.overrides) {
-    Object.entries(options.overrides).forEach(([key, value]) => {
+    for (const [key, value] of Object.entries(options.overrides)) {
       overrides.push({
         files: key,
         options: value
       })
-    })
+    }
   }
 
   return {

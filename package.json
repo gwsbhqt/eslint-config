@@ -14,7 +14,7 @@
     "build": "tsdown",
     "inspector": "bunx @eslint/config-inspector@latest",
     "lint": "eslint . --fix --concurrency auto",
-    "release:patch": "tsdown && npm version patch && npm publish"
+    "release:patch": "tsdown && npm version patch && npm publish --registry=https://registry.npmjs.org/"
   },
   "dependencies": {
     "@eslint/compat": "^1.4.1",

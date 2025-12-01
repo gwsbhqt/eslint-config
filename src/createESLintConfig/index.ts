@@ -31,7 +31,8 @@ import type {
 } from 'typescript-eslint'
 
 interface CreateESLintConfig
-  extends CreateCustomPerfectionistConfig,
+  extends
+    CreateCustomPerfectionistConfig,
     CreateDisableFilesConfig,
     CreateDisableRulesConfig,
     CreateEnableRulesConfig,

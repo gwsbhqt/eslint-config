@@ -1,7 +1,9 @@
 import type { Config } from 'prettier'
 
-interface CreatePrettierConfigOptions
-  extends Omit<Config, 'overrides' | 'plugins'> {
+interface CreatePrettierConfigOptions extends Omit<
+  Config,
+  'overrides' | 'plugins'
+> {
   overrides?: Record<string, Config>
   plugins?: Config['plugins']
 }

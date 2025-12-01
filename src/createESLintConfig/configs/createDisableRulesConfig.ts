@@ -16,8 +16,15 @@ export function createDisableRulesConfig(
     'import-x/no-named-as-default-member',
     'react-refresh/only-export-components',
     'react/prop-types',
+    'unicorn/custom-error-definition',
     'unicorn/filename-case',
-    'unicorn/prefer-spread'
+    'unicorn/import-style',
+    'unicorn/no-array-callback-reference',
+    'unicorn/no-null',
+    'unicorn/no-process-exit',
+    'unicorn/no-this-assignment',
+    'unicorn/prefer-spread',
+    'unicorn/prevent-abbreviations'
   ]
   const disableRules = defaultDisableRules.concat(config.disableRules)
   return {

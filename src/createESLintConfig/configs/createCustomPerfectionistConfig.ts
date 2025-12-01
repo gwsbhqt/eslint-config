@@ -15,8 +15,7 @@ import type { FlatConfig } from '@eslint/compat'
 import type { Linter } from 'eslint'
 
 export interface CreateCustomPerfectionistConfig
-  extends CreateImportXNoUnresolved,
-    CreatePerfectionistSortImports {
+  extends CreateImportXNoUnresolved, CreatePerfectionistSortImports {
   rules: Linter.RulesRecord
 }
 
@@ -46,6 +45,10 @@ export function createCustomPerfectionistConfig(
         }
       ],
       'perfectionist/sort-imports': createPerfectionistSortImports(config),
+      'unicorn/consistent-function-scoping': [
+        2,
+        { checkArrowFunctions: false }
+      ],
       ...config.rules
     },
     settings: {

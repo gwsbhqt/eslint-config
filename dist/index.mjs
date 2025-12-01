@@ -78,6 +78,7 @@ function createCustomPerfectionistConfig(config$1) {
 				newlinesBetween: 1
 			}],
 			"perfectionist/sort-imports": createPerfectionistSortImports(config$1),
+			"unicorn/consistent-function-scoping": [2, { checkArrowFunctions: false }],
 			...config$1.rules
 		},
 		settings: {
@@ -111,8 +112,15 @@ function createDisableRulesConfig(config$1) {
 		"import-x/no-named-as-default-member",
 		"react-refresh/only-export-components",
 		"react/prop-types",
+		"unicorn/custom-error-definition",
 		"unicorn/filename-case",
-		"unicorn/prefer-spread"
+		"unicorn/import-style",
+		"unicorn/no-array-callback-reference",
+		"unicorn/no-null",
+		"unicorn/no-process-exit",
+		"unicorn/no-this-assignment",
+		"unicorn/prefer-spread",
+		"unicorn/prevent-abbreviations"
 	].concat(config$1.disableRules);
 	return { rules: Object.fromEntries(disableRules.map((rule) => [rule, 0])) };
 }

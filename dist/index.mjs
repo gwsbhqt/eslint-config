@@ -112,7 +112,6 @@ function createDisableRulesConfig(config$1) {
 		"import-x/no-named-as-default-member",
 		"react-refresh/only-export-components",
 		"react/prop-types",
-		"unicorn/custom-error-definition",
 		"unicorn/filename-case",
 		"unicorn/import-style",
 		"unicorn/no-array-callback-reference",
@@ -142,7 +141,6 @@ function createEnableRulesConfig(config$1) {
 		"react/self-closing-comp",
 		"unicorn/better-regex",
 		"unicorn/consistent-destructuring",
-		"unicorn/custom-error-definition",
 		"unicorn/prefer-import-meta-properties"
 	].concat(config$1.enableRules);
 	return { rules: Object.fromEntries(enableRules.map((rule) => [rule, 2])) };

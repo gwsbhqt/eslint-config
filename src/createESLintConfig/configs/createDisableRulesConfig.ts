@@ -16,7 +16,6 @@ export function createDisableRulesConfig(
     'import-x/no-named-as-default-member',
     'react-refresh/only-export-components',
     'react/prop-types',
-    'unicorn/custom-error-definition',
     'unicorn/filename-case',
     'unicorn/import-style',
     'unicorn/no-array-callback-reference',

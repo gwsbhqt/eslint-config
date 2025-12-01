@@ -21,7 +21,6 @@ export function createEnableRulesConfig(
     'react/self-closing-comp',
     'unicorn/better-regex',
     'unicorn/consistent-destructuring',
-    'unicorn/custom-error-definition',
     'unicorn/prefer-import-meta-properties'
   ]
   const enableRules = defaultEnableRules.concat(config.enableRules)

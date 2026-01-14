@@ -100,13 +100,13 @@ export function defineESLintConfig(
     unicorn.configs.recommended,
     defineCustomPerfectionistConfig(realConfig),
     defineESXConfig(realConfig.esTarget),
-    defineGlobalIgnoresConfig(realConfig.globalIgnores),
-    defineIgnoreFileConfig(gitignorePath),
     ...realConfig.configs,
     defineEnableRulesConfig(defaultEnableRules),
     defineDisableRulesConfig(defaultDisableRules),
     defineEnableRulesConfig(realConfig.enableRules),
     defineDisableRulesConfig(realConfig.disableRules),
+    defineGlobalIgnoresConfig(realConfig.globalIgnores),
+    defineIgnoreFileConfig(gitignorePath),
     prettierRecommended,
     prettierConfig
   ]

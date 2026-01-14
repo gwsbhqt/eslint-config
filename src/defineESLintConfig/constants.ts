@@ -11,6 +11,7 @@ export const defaultDisableRules = Object.freeze([
   '@typescript-eslint/no-namespace',
   '@typescript-eslint/no-this-alias',
   '@typescript-eslint/no-unsafe-function-type',
+  '@typescript-eslint/triple-slash-reference',
   'import-x/no-named-as-default-member',
   'react-refresh/only-export-components',
   'react/prop-types',

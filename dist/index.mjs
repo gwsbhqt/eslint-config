@@ -27,6 +27,7 @@ const defaultDisableRules = Object.freeze([
 	"@typescript-eslint/no-namespace",
 	"@typescript-eslint/no-this-alias",
 	"@typescript-eslint/no-unsafe-function-type",
+	"@typescript-eslint/triple-slash-reference",
 	"import-x/no-named-as-default-member",
 	"react-refresh/only-export-components",
 	"react/prop-types",
@@ -227,13 +228,13 @@ function defineESLintConfig(config) {
 		unicorn.configs.recommended,
 		defineCustomPerfectionistConfig(realConfig),
 		defineESXConfig(realConfig.esTarget),
-		defineGlobalIgnoresConfig(realConfig.globalIgnores),
-		defineIgnoreFileConfig(gitignorePath),
 		...realConfig.configs,
 		defineEnableRulesConfig(defaultEnableRules),
 		defineDisableRulesConfig(defaultDisableRules),
 		defineEnableRulesConfig(realConfig.enableRules),
 		defineDisableRulesConfig(realConfig.disableRules),
+		defineGlobalIgnoresConfig(realConfig.globalIgnores),
+		defineIgnoreFileConfig(gitignorePath),
 		prettierRecommended,
 		prettierConfig
 	].filter(Boolean));

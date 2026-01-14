@@ -49,6 +49,7 @@ export function defineCustomPerfectionistConfig(
         2,
         { checkArrowFunctions: false }
       ],
+      'unicorn/no-useless-undefined': [2, { checkArguments: false }],
       ...config.rules
     },
     settings: {

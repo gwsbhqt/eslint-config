@@ -25,10 +25,9 @@ import {
   gitignorePath
 } from './constants'
 
-import type { DefineCustomPerfectionistConfig } from './configs'
+import type { DefineCustomPerfectionistConfig, ESTarget } from './configs'
 import type { InfiniteConfigWithFalsy } from './types'
 import type { ConfigWithExtendsArray } from '@eslint/config-helpers'
-import type { ESTarget } from 'eslint-plugin-es-x'
 import type { Config } from 'eslint/config'
 
 interface DefineESLintConfig extends DefineCustomPerfectionistConfig {

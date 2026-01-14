@@ -32,13 +32,13 @@ In your `eslint.config.js`:
 
 ```javascript
 // eslint.config.js
-import { createESLintConfig } from '@gwsbhqt/eslint-config'
+import { defineESLintConfig } from '@gwsbhqt/eslint-config'
 
 // Export the configuration array
-export default createESLintConfig({
+export default defineESLintConfig({
   // Basic customizations can go here
   noUnresolvedIgnore: ['^@/'], // Handle '@/*' path aliases
-  disableFiles: ['dist/**'] // Ignore the output directory
+  globalIgnores: ['dist/**'] // Ignore the output directory
 })
 ```
 
@@ -48,11 +48,11 @@ In your `prettier.config.js`:
 
 ```javascript
 // prettier.config.js
-import { createPrettierConfig } from '@gwsbhqt/eslint-config'
+import { definePrettierConfig } from '@gwsbhqt/eslint-config'
 
-export default createPrettierConfig({
+export default definePrettierConfig({
   printWidth: 100,
-  semi: true,
+  semi: true
 })
 ```
 
@@ -60,9 +60,9 @@ export default createPrettierConfig({
 
 ## API Reference
 
-### `createESLintConfig(options)`
+### `defineESLintConfig(options)`
 
-Creates a complete ESLint flat configuration array. All options are optional.
+Defines a complete ESLint flat configuration array. All options are optional.
 
 #### `configs: FlatConfig[]`
 
@@ -71,33 +71,29 @@ Merge additional ESLint flat config objects. This is useful for adding plugins o
 **Example**: Add the `eslint-plugin-unicorn` plugin.
 
 ```javascript
-import unicorn from 'eslint-plugin-unicorn';
+import unicorn from 'eslint-plugin-unicorn'
 
-export default createESLintConfig({
+export default defineESLintConfig({
   configs: [
     unicorn.configs['flat/recommended'],
     {
       rules: {
-        'unicorn/prevent-abbreviations': 'off',
+        'unicorn/prevent-abbreviations': 'off'
       }
     }
   ]
 })
 ```
 
-#### `disableFiles: string[]`
+#### `globalIgnores: string[]`
 
 Provide an array of glob patterns for files and directories that ESLint should completely ignore.
 
 **Example**: Ignore all test files and generated files.
 
 ```javascript
-export default createESLintConfig({
-  disableFiles: [
-    '**/*.test.ts',
-    '**/*.spec.ts',
-    'src/generated/**'
-  ]
+export default defineESLintConfig({
+  globalIgnores: ['**/*.test.ts', '**/*.spec.ts', 'src/generated/**']
 })
 ```
 
@@ -108,7 +104,7 @@ Provide an array of rule names to disable globally.
 **Example**: Disable the `no-console` and `no-debugger` rules.
 
 ```javascript
-export default createESLintConfig({
+export default defineESLintConfig({
   disableRules: ['no-console', 'no-debugger']
 })
 ```
@@ -120,7 +116,7 @@ Provide an array of rule names to enable. This is useful for activating rules th
 **Example**: Enforce the use of `===` and `!==` by enabling `eqeqeq`.
 
 ```javascript
-export default createESLintConfig({
+export default defineESLintConfig({
   enableRules: ['eqeqeq']
 })
 ```
@@ -132,7 +128,7 @@ An array of patterns passed to the `import-x/no-unresolved` rule. This is essent
 **Example**: Ignore aliases starting with `^@/` and `^~_`.
 
 ```javascript
-export default createESLintConfig({
+export default defineESLintConfig({
   noUnresolvedIgnore: ['^@/', '~/']
 })
 ```
@@ -144,7 +140,7 @@ A map of custom rules specifically for `eslint-plugin-perfectionist`. This allow
 **Example**: Change the sorting order for object keys.
 
 ```javascript
-export default createESLintConfig({
+export default defineESLintConfig({
   rules: {
     'perfectionist/sort-objects': [
       'error',
@@ -162,10 +158,10 @@ export default createESLintConfig({
 
 Define the grouping and order for `perfectionist/sort-imports`.
 
-**Example**: Create custom groups for imports.
+**Example**: Define custom groups for imports.
 
 ```javascript
-export default createESLintConfig({
+export default defineESLintConfig({
   sortImportsGroups: [
     'type',
     'react',
@@ -187,16 +183,16 @@ Define glob patterns that `perfectionist/sort-imports` should consider as "inter
 **Example**: Treat aliased paths as internal.
 
 ```javascript
-export default createESLintConfig({
+export default defineESLintConfig({
   sortImportsInternalPattern: ['@/**', '~/**']
 })
 ```
 
 ---
 
-### `createPrettierConfig(options)`
+### `definePrettierConfig(options)`
 
-Creates a Prettier configuration object. It accepts all standard Prettier options, plus the following enhancements.
+Defines a Prettier configuration object. It accepts all standard Prettier options, plus the following enhancements.
 
 #### Standard Prettier Options
 
@@ -205,7 +201,7 @@ You can pass any standard option like `printWidth`, `semi`, `singleQuote`, etc.
 **Example**: Customize basic formatting rules.
 
 ```javascript
-export default createPrettierConfig({
+export default definePrettierConfig({
   printWidth: 100,
   semi: false,
   singleQuote: true,
@@ -221,7 +217,7 @@ Provide an array of additional Prettier plugins. `prettier-plugin-packagejson` a
 **Example**: Add a plugin to organize imports (if not handled by ESLint).
 
 ```javascript
-export default createPrettierConfig({
+export default definePrettierConfig({
   plugins: ['prettier-plugin-organize-imports']
 })
 ```
@@ -233,7 +229,7 @@ Define file-specific overrides. The key is a glob pattern and the value is a Pre
 **Example**: Use a wider print width for JSON files and enable prose wrapping for Markdown.
 
 ```javascript
-export default createPrettierConfig({
+export default definePrettierConfig({
   overrides: {
     '*.json': {
       printWidth: 200

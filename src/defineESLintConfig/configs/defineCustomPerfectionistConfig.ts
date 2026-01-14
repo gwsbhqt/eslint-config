@@ -3,24 +3,24 @@ import globals from 'globals'
 
 import { tsconfigPath } from '../constants'
 import {
-  createImportXNoUnresolved,
-  createPerfectionistSortImports
+  defineImportXNoUnresolvedRule,
+  definePerfectionistSortImportsRule
 } from '../rules'
 
 import type {
-  CreateImportXNoUnresolved,
-  CreatePerfectionistSortImports
+  DefineImportXNoUnresolvedRule,
+  DefinePerfectionistSortImportsRule
 } from '../rules'
 import type { FlatConfig } from '@eslint/compat'
 import type { Linter } from 'eslint'
 
-export interface CreateCustomPerfectionistConfig
-  extends CreateImportXNoUnresolved, CreatePerfectionistSortImports {
+export interface DefineCustomPerfectionistConfig
+  extends DefineImportXNoUnresolvedRule, DefinePerfectionistSortImportsRule {
   rules: Linter.RulesRecord
 }
 
-export function createCustomPerfectionistConfig(
-  config: CreateCustomPerfectionistConfig
+export function defineCustomPerfectionistConfig(
+  config: DefineCustomPerfectionistConfig
 ): FlatConfig {
   return {
     files: ['**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}'],
@@ -35,7 +35,7 @@ export function createCustomPerfectionistConfig(
         2,
         { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }
       ],
-      'import-x/no-unresolved': createImportXNoUnresolved(config),
+      'import-x/no-unresolved': defineImportXNoUnresolvedRule(config),
       'no-empty': [2, { allowEmptyCatch: true }],
       'perfectionist/sort-exports': [
         2,
@@ -44,7 +44,7 @@ export function createCustomPerfectionistConfig(
           newlinesBetween: 1
         }
       ],
-      'perfectionist/sort-imports': createPerfectionistSortImports(config),
+      'perfectionist/sort-imports': definePerfectionistSortImportsRule(config),
       'unicorn/consistent-function-scoping': [
         2,
         { checkArrowFunctions: false }

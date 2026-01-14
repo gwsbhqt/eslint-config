@@ -1,13 +1,13 @@
-import type { Linter } from 'eslint'
+import type { Rule } from '../types'
 
-export interface CreatePerfectionistSortImports {
+export interface DefinePerfectionistSortImportsRule {
   sortImportsGroups: string[] | string[][]
   sortImportsInternalPattern: string[]
 }
 
-export function createPerfectionistSortImports(
-  config: CreatePerfectionistSortImports
-): Linter.RuleEntry {
+export function definePerfectionistSortImportsRule(
+  config: DefinePerfectionistSortImportsRule
+): Rule {
   const defaultGroups = [
     ['side-effect', 'side-effect-style'],
     'style',

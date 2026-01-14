@@ -1,3 +1,5 @@
-import { createESLintConfig } from '@gwsbhqt/eslint-config'
+import { defineESLintConfig } from '@gwsbhqt/eslint-config'
 
-export default createESLintConfig()
+export default defineESLintConfig({
+  globalIgnores: ['**/dist']
+})

@@ -32,13 +32,13 @@ npm install -D @gwsbhqt/eslint-config eslint prettier typescript
 
 ```javascript
 // eslint.config.js
-import { createESLintConfig } from '@gwsbhqt/eslint-config'
+import { defineESLintConfig } from '@gwsbhqt/eslint-config'
 
 // 导出配置数组
-export default createESLintConfig({
+export default defineESLintConfig({
   // 在此进行基本自定义
   noUnresolvedIgnore: ['^@/'], // 处理 '@/*' 路径别名
-  disableFiles: ['dist/**'] // 忽略输出目录
+  globalIgnores: ['dist/**'] // 忽略输出目录
 })
 ```
 
@@ -48,11 +48,11 @@ export default createESLintConfig({
 
 ```javascript
 // prettier.config.js
-import { createPrettierConfig } from '@gwsbhqt/eslint-config'
+import { definePrettierConfig } from '@gwsbhqt/eslint-config'
 
-export default createPrettierConfig({
+export default definePrettierConfig({
   printWidth: 100,
-  semi: true,
+  semi: true
 })
 ```
 
@@ -60,7 +60,7 @@ export default createPrettierConfig({
 
 ## API 参考
 
-### `createESLintConfig(options)`
+### `defineESLintConfig(options)`
 
 创建一个完整的 ESLint flat 配置数组。所有选项均为可选。
 
@@ -71,33 +71,29 @@ export default createPrettierConfig({
 **示例**: 添加 `eslint-plugin-unicorn` 插件。
 
 ```javascript
-import unicorn from 'eslint-plugin-unicorn';
+import unicorn from 'eslint-plugin-unicorn'
 
-export default createESLintConfig({
+export default defineESLintConfig({
   configs: [
     unicorn.configs['flat/recommended'],
     {
       rules: {
-        'unicorn/prevent-abbreviations': 'off',
+        'unicorn/prevent-abbreviations': 'off'
       }
     }
   ]
 })
 ```
 
-#### `disableFiles: string[]`
+#### `globalIgnores: string[]`
 
 提供一个 glob 模式数组，让 ESLint 完全忽略指定的文件和目录。
 
 **示例**: 忽略所有测试文件和生成的文件。
 
 ```javascript
-export default createESLintConfig({
-  disableFiles: [
-    '**/*.test.ts',
-    '**/*.spec.ts',
-    'src/generated/**'
-  ]
+export default defineESLintConfig({
+  globalIgnores: ['**/*.test.ts', '**/*.spec.ts', 'src/generated/**']
 })
 ```
 
@@ -108,7 +104,7 @@ export default createESLintConfig({
 **示例**: 禁用 `no-console` 和 `no-debugger` 规则。
 
 ```javascript
-export default createESLintConfig({
+export default defineESLintConfig({
   disableRules: ['no-console', 'no-debugger']
 })
 ```
@@ -120,7 +116,7 @@ export default createESLintConfig({
 **示例**: 通过启用 `eqeqeq` 强制使用 `===` 和 `!==`。
 
 ```javascript
-export default createESLintConfig({
+export default defineESLintConfig({
   enableRules: ['eqeqeq']
 })
 ```
@@ -132,7 +128,7 @@ export default createESLintConfig({
 **示例**: 忽略以 `^@/` 和 `^~_` 开头的别名。
 
 ```javascript
-export default createESLintConfig({
+export default defineESLintConfig({
   noUnresolvedIgnore: ['^@/', '~/']
 })
 ```
@@ -144,7 +140,7 @@ export default createESLintConfig({
 **示例**: 更改对象键的排序顺序。
 
 ```javascript
-export default createESLintConfig({
+export default defineESLintConfig({
   rules: {
     'perfectionist/sort-objects': [
       'error',
@@ -165,7 +161,7 @@ export default createESLintConfig({
 **示例**: 为导入创建自定义分组。
 
 ```javascript
-export default createESLintConfig({
+export default defineESLintConfig({
   sortImportsGroups: [
     'type',
     'react',
@@ -187,14 +183,14 @@ export default createESLintConfig({
 **示例**: 将别名路径视为内部模块。
 
 ```javascript
-export default createESLintConfig({
+export default defineESLintConfig({
   sortImportsInternalPattern: ['@/**', '~/**']
 })
 ```
 
 ---
 
-### `createPrettierConfig(options)`
+### `definePrettierConfig(options)`
 
 创建一个 Prettier 配置对象。它接受所有标准的 Prettier 选项，并增加了以下增强功能。
 
@@ -205,7 +201,7 @@ export default createESLintConfig({
 **示例**: 自定义基本格式化规则。
 
 ```javascript
-export default createPrettierConfig({
+export default definePrettierConfig({
   printWidth: 100,
   semi: false,
   singleQuote: true,
@@ -221,7 +217,7 @@ export default createPrettierConfig({
 **示例**: 添加一个插件来组织导入（如果不由 ESLint 处理）。
 
 ```javascript
-export default createPrettierConfig({
+export default definePrettierConfig({
   plugins: ['prettier-plugin-organize-imports']
 })
 ```
@@ -233,7 +229,7 @@ export default createPrettierConfig({
 **示例**: 为 JSON 文件使用更宽的打印宽度，并为 Markdown 文件启用自动换行。
 
 ```javascript
-export default createPrettierConfig({
+export default definePrettierConfig({
   overrides: {
     '*.json': {
       printWidth: 200

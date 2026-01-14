@@ -1,6 +1,6 @@
 import type { Config } from 'prettier'
 
-interface CreatePrettierConfigOptions extends Omit<
+interface DefinePrettierConfigOptions extends Omit<
   Config,
   'overrides' | 'plugins'
 > {
@@ -9,18 +9,18 @@ interface CreatePrettierConfigOptions extends Omit<
 }
 
 /**
- * Creates a standardized Prettier configuration with sensible defaults and plugin support.
+ * Defines a standardized Prettier configuration with sensible defaults and plugin support.
  *
- * @param {CreatePrettierConfigOptions} options - Configuration options for customizing the Prettier setup
+ * @param {DefinePrettierConfigOptions} options - Configuration options for customizing the Prettier setup
  * @returns {Config} A complete Prettier configuration object ready to use
  *
  * @example
  * ```typescript
  * // Basic usage
- * const config = createPrettierConfig()
+ * const config = definePrettierConfig()
  *
  * // With custom options and overrides
- * const config = createPrettierConfig({
+ * const config = definePrettierConfig({
  *   printWidth: 100,
  *   overrides: {
  *     '*.json': { printWidth: 120 },
@@ -30,8 +30,8 @@ interface CreatePrettierConfigOptions extends Omit<
  * })
  * ```
  */
-export function createPrettierConfig(
-  options?: CreatePrettierConfigOptions
+export function definePrettierConfig(
+  options?: DefinePrettierConfigOptions
 ): Config {
   const overrides: Config['overrides'] = []
   const plugins = options?.plugins ?? []

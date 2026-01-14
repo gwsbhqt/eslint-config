@@ -1,12 +1,12 @@
-import type { Linter } from 'eslint'
+import type { Rule } from '../types'
 
-export interface CreateImportXNoUnresolved {
+export interface DefineImportXNoUnresolvedRule {
   noUnresolvedIgnore: string[]
 }
 
-export function createImportXNoUnresolved(
-  config: CreateImportXNoUnresolved
-): Linter.RuleEntry {
+export function defineImportXNoUnresolvedRule(
+  config: DefineImportXNoUnresolvedRule
+): Rule {
   const defaultIgnore = [
     String.raw`^(~|@|#)\w+/`,
     String.raw`^(bun|node|deno):`,

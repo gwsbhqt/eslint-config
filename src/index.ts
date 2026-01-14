@@ -1,2 +1,2 @@
-export * from './createESLintConfig'
-export * from './createPrettierConfig'
+export * from './defineESLintConfig'
+export * from './definePrettierConfig'

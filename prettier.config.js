@@ -1,3 +1,3 @@
-import { createPrettierConfig } from '@gwsbhqt/eslint-config'
+import { definePrettierConfig } from '@gwsbhqt/eslint-config'
 
-export default createPrettierConfig()
+export default definePrettierConfig()

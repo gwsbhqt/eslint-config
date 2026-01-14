@@ -1,66 +1,51 @@
-import { ConfigArray, InfiniteDepthConfigWithExtends } from "typescript-eslint";
+import { Config } from "eslint/config";
+import { ESTarget } from "eslint-plugin-es-x";
 import "@eslint/compat";
+import { ConfigWithExtendsArray } from "@eslint/config-helpers";
 import { Linter } from "eslint";
-import { Config } from "prettier";
+import { Config as Config$1 } from "prettier";
 
-//#region src/createESLintConfig/rules/createImportXNoUnresolved.d.ts
-interface CreateImportXNoUnresolved {
+//#region src/defineESLintConfig/rules/defineImportXNoUnresolvedRule.d.ts
+interface DefineImportXNoUnresolvedRule {
   noUnresolvedIgnore: string[];
 }
 //#endregion
-//#region src/createESLintConfig/rules/createPerfectionistSortImports.d.ts
-interface CreatePerfectionistSortImports {
+//#region src/defineESLintConfig/rules/definePerfectionistSortImportsRule.d.ts
+interface DefinePerfectionistSortImportsRule {
   sortImportsGroups: string[] | string[][];
   sortImportsInternalPattern: string[];
 }
 //#endregion
-//#region src/createESLintConfig/configs/createCustomPerfectionistConfig.d.ts
-interface CreateCustomPerfectionistConfig extends CreateImportXNoUnresolved, CreatePerfectionistSortImports {
+//#region src/defineESLintConfig/configs/defineCustomPerfectionistConfig.d.ts
+interface DefineCustomPerfectionistConfig extends DefineImportXNoUnresolvedRule, DefinePerfectionistSortImportsRule {
   rules: Linter.RulesRecord;
 }
 //#endregion
-//#region src/createESLintConfig/configs/createDisableFilesConfig.d.ts
-interface CreateDisableFilesConfig {
-  disableFiles: string[];
-}
-//#endregion
-//#region src/createESLintConfig/configs/createDisableRulesConfig.d.ts
-interface CreateDisableRulesConfig {
+//#region src/defineESLintConfig/index.d.ts
+interface DefineESLintConfig extends DefineCustomPerfectionistConfig {
+  configs: ConfigWithExtendsArray[];
   disableRules: string[];
-}
-//#endregion
-//#region src/createESLintConfig/configs/createEnableRulesConfig.d.ts
-interface CreateEnableRulesConfig {
   enableRules: string[];
-}
-//#endregion
-//#region src/createESLintConfig/configs/createESXConfig.d.ts
-interface CreateESXConfig {
   esTarget: ESTarget;
-}
-type ESTarget = 'es3' | 'es5' | 'es6' | 'es2015' | 'es2016' | 'es2017' | 'es2018' | 'es2019' | 'es2020' | 'es2021' | 'es2022' | 'es2023' | 'es2024' | 'esnext';
-//#endregion
-//#region src/createESLintConfig/index.d.ts
-interface CreateESLintConfig extends CreateCustomPerfectionistConfig, CreateDisableFilesConfig, CreateDisableRulesConfig, CreateEnableRulesConfig, CreateESXConfig {
-  configs: InfiniteDepthConfigWithExtends[];
+  globalIgnores: string[];
 }
 /**
- * Creates a standardized ESLint configuration with sensible defaults and customization options.
+ * Defines a standardized ESLint configuration with sensible defaults and customization options.
  *
- * @param {Partial<CreateESLintConfig>} config - Configuration options for customizing the ESLint setup.
- * @returns {ConfigArray} A complete ESLint configuration array ready to use.
+ * @param {Partial<DefineESLintConfig>} config - Configuration options for customizing the ESLint setup.
+ * @returns {Config[]} A complete ESLint configuration array ready to use.
  *
  * @example
  * ```typescript
  * // Basic usage
- * const eslintConfig = createESLintConfig();
+ * const eslintConfig = defineESLintConfig();
  *
  * // With custom options
- * const eslintConfig = createESLintConfig({
+ * const eslintConfig = defineESLintConfig({
  *   configs: [{ rules: { 'no-unused-vars': 'off' } }],
- *   disableFiles: ['**\/*.test.ts'],
  *   disableRules: ['no-console'],
  *   enableRules: ['no-debugger'],
+ *   globalIgnores: ['**\/*.test.ts'],
  *   noUnresolvedIgnore: ['^@/'],
  *   rules: { 'perfectionist/sort-objects': 'error' },
  *   sortImportsGroups: [
@@ -78,26 +63,26 @@ interface CreateESLintConfig extends CreateCustomPerfectionistConfig, CreateDisa
  * });
  * ```
  */
-declare function createESLintConfig(config?: Partial<CreateESLintConfig>): ConfigArray;
+declare function defineESLintConfig(config?: Partial<DefineESLintConfig>): Config[];
 //#endregion
-//#region src/createPrettierConfig/index.d.ts
-interface CreatePrettierConfigOptions extends Omit<Config, 'overrides' | 'plugins'> {
-  overrides?: Record<string, Config>;
-  plugins?: Config['plugins'];
+//#region src/definePrettierConfig/index.d.ts
+interface DefinePrettierConfigOptions extends Omit<Config$1, 'overrides' | 'plugins'> {
+  overrides?: Record<string, Config$1>;
+  plugins?: Config$1['plugins'];
 }
 /**
- * Creates a standardized Prettier configuration with sensible defaults and plugin support.
+ * Defines a standardized Prettier configuration with sensible defaults and plugin support.
  *
- * @param {CreatePrettierConfigOptions} options - Configuration options for customizing the Prettier setup
+ * @param {DefinePrettierConfigOptions} options - Configuration options for customizing the Prettier setup
  * @returns {Config} A complete Prettier configuration object ready to use
  *
  * @example
  * ```typescript
  * // Basic usage
- * const config = createPrettierConfig()
+ * const config = definePrettierConfig()
  *
  * // With custom options and overrides
- * const config = createPrettierConfig({
+ * const config = definePrettierConfig({
  *   printWidth: 100,
  *   overrides: {
  *     '*.json': { printWidth: 120 },
@@ -107,6 +92,6 @@ interface CreatePrettierConfigOptions extends Omit<Config, 'overrides' | 'plugin
  * })
  * ```
  */
-declare function createPrettierConfig(options?: CreatePrettierConfigOptions): Config;
+declare function definePrettierConfig(options?: DefinePrettierConfigOptions): Config$1;
 //#endregion
-export { createESLintConfig, createPrettierConfig };
+export { defineESLintConfig, definePrettierConfig };

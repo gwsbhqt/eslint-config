@@ -1,6 +1,6 @@
 {
   "name": "@gwsbhqt/eslint-config",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "A flexible and powerful factory for creating ESLint and Prettier configurations.",
   "license": "MIT",
   "type": "module",

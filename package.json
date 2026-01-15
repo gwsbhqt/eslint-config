@@ -14,7 +14,7 @@
     "build": "tsdown",
     "inspector": "bunx @eslint/config-inspector@latest",
     "lint": "eslint . --fix --concurrency auto",
-    "release:patch": "tsdown && npm version patch && npm publish --registry=https://registry.npmjs.org/"
+    "release:patch": "tsdown && npm version patch --no-git-tag-version && npm publish --registry=https://registry.npmjs.org/"
   },
   "dependencies": {
     "@eslint/compat": "^2.0.1",
@@ -29,24 +29,26 @@
     "eslint-plugin-es-x": "^9.3.0",
     "eslint-plugin-import-x": "^4.16.1",
     "eslint-plugin-perfectionist": "^5.3.1",
-    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-prettier": "^5.5.5",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.26",
     "eslint-plugin-unicorn": "^62.0.0",
     "find-up": "^8.0.0",
     "globals": "^17.0.0",
-    "prettier": "^3.7.4",
+    "prettier": "^3.8.0",
+    "prettier-plugin-classnames": "^0.8.6",
+    "prettier-plugin-merge": "^0.8.0",
     "prettier-plugin-packagejson": "^2.5.21",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "tsdown": "^0.19.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.53.0"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "devDependencies": {
     "@total-typescript/ts-reset": "^0.6.1"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

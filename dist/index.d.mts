@@ -69,6 +69,11 @@ declare function defineESLintConfig(config?: Partial<DefineESLintConfig>): Confi
 //#endregion
 //#region src/definePrettierConfig/index.d.ts
 interface DefinePrettierConfigOptions extends Omit<Config$1, 'overrides' | 'plugins'> {
+  /**
+   * Enable Tailwind CSS related Prettier plugins.
+   * @default true
+   */
+  enableTailwindPlugins?: boolean;
   overrides?: Record<string, Config$1>;
   plugins?: Config$1['plugins'];
 }
@@ -91,6 +96,11 @@ interface DefinePrettierConfigOptions extends Omit<Config$1, 'overrides' | 'plug
  *     '*.md': { proseWrap: 'always' }
  *   },
  *   plugins: ['prettier-plugin-organize-imports']
+ * })
+ *
+ * // Disabling Tailwind CSS related plugins, default is enabled
+ * const config = definePrettierConfig({
+ *   enableTailwindPlugins: false
  * })
  * ```
  */

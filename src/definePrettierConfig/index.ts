@@ -4,6 +4,11 @@ interface DefinePrettierConfigOptions extends Omit<
   Config,
   'overrides' | 'plugins'
 > {
+  /**
+   * Enable Tailwind CSS related Prettier plugins.
+   * @default true
+   */
+  enableTailwindPlugins?: boolean
   overrides?: Record<string, Config>
   plugins?: Config['plugins']
 }
@@ -28,13 +33,19 @@ interface DefinePrettierConfigOptions extends Omit<
  *   },
  *   plugins: ['prettier-plugin-organize-imports']
  * })
+ *
+ * // Disabling Tailwind CSS related plugins, default is enabled
+ * const config = definePrettierConfig({
+ *   enableTailwindPlugins: false
+ * })
  * ```
  */
 export function definePrettierConfig(
   options?: DefinePrettierConfigOptions
 ): Config {
   const overrides: Config['overrides'] = []
-  const plugins = options?.plugins ?? []
+  const optionsPlugins = options?.plugins ?? []
+  const plugins: Config['plugins'] = []
 
   if (options?.overrides) {
     for (const [key, value] of Object.entries(options.overrides)) {
@@ -45,16 +56,21 @@ export function definePrettierConfig(
     }
   }
 
+  plugins.push('prettier-plugin-packagejson')
+  if (options?.enableTailwindPlugins ?? true) {
+    plugins.push(
+      'prettier-plugin-tailwindcss',
+      'prettier-plugin-classnames',
+      'prettier-plugin-merge'
+    )
+  }
+
   return {
     semi: false,
     singleQuote: true,
     trailingComma: 'none',
     ...options,
     overrides,
-    plugins: [
-      'prettier-plugin-packagejson',
-      'prettier-plugin-tailwindcss',
-      ...plugins
-    ]
+    plugins: plugins.concat(optionsPlugins)
   }
 }

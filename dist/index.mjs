@@ -262,26 +262,30 @@ function defineESLintConfig(config) {
 *   },
 *   plugins: ['prettier-plugin-organize-imports']
 * })
+*
+* // Disabling Tailwind CSS related plugins, default is enabled
+* const config = definePrettierConfig({
+*   enableTailwindPlugins: false
+* })
 * ```
 */
 function definePrettierConfig(options) {
 	const overrides = [];
-	const plugins = options?.plugins ?? [];
+	const optionsPlugins = options?.plugins ?? [];
+	const plugins = [];
 	if (options?.overrides) for (const [key, value] of Object.entries(options.overrides)) overrides.push({
 		files: key,
 		options: value
 	});
+	plugins.push("prettier-plugin-packagejson");
+	if (options?.enableTailwindPlugins ?? true) plugins.push("prettier-plugin-tailwindcss", "prettier-plugin-classnames", "prettier-plugin-merge");
 	return {
 		semi: false,
 		singleQuote: true,
 		trailingComma: "none",
 		...options,
 		overrides,
-		plugins: [
-			"prettier-plugin-packagejson",
-			"prettier-plugin-tailwindcss",
-			...plugins
-		]
+		plugins: plugins.concat(optionsPlugins)
 	};
 }
 
